@@ -1,0 +1,15 @@
+def primes(n):
+  """Lists primes up to user input limit"""
+  primelist = []
+  for a in range(2,n):
+    for x in range (2,a):
+      if a % x == 0:
+        print(a, 'equals', x, '*', a//x)
+        break
+    else:
+      print(a, 'is a prime number')
+      primelist.append(a)
+  return primelist
+
+n = int(input("enter upper limit... "))
+primes(n)

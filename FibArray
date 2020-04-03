@@ -1,0 +1,29 @@
+import time
+#WANT: choosable nth fibonacci number, USE array to store previously calulated values
+
+
+def fib(n):
+    """prints nth fibonacci number using array to store earlier values"""
+    if list[n-1] != 0:
+        return list[n-1]
+    else:
+        list[n-1] = fib(n-1)+fib(n-2)
+        return list[n-1]
+
+def getguess(a):  ## check to make sure input is integer
+    rawguess = input(a)
+    #print(rawguess, type(rawguess))
+    try:
+        return int(rawguess)
+    except ValueError:
+        return getguess("I need an integer input: ")
+
+N = getguess("I can produce Nth Fibonacci number; choose N: ")
+list = [0 for x in range (N)]
+list[0] = 1
+list[1] = 1
+#print (list)
+t1 = time.time()
+print(fib(N))
+t2 = time.time()
+print ((t2-t1), " seconds elapsed")

@@ -1,0 +1,43 @@
+#""plot mandelbrot set (at choosable decimal precision?)""
+#mandelbrot equation: z[n+1] = z[n]^2 + c
+#included in set are those complex c which do not diverge when
+#fxn is iterated from z[0]=0
+import cmath
+import numpy as np
+import matplotlib.pyplot as plt
+
+real_range = np.arange(-2,1,.01)
+im_range = np.arange(-1,1,.01)
+iterations = 50 #iterations of mandelbrot fxn per complex number
+divlimit = 5e100 # limit beyond which result is considered divergent
+realkeepers = np.array([0])
+imagkeepers = np.array([0])
+
+def mand(numb):
+    zee = complex(0,0)
+    numb = complex(numb)
+    for k in range(iterations):
+        zee = zee*zee + numb
+    return zee
+
+for a in real_range:
+    for b in im_range:
+        c = complex(a,b)
+        result = mand(c)
+        try:
+            size = abs(result)
+        except OverflowError:
+            print("overflowed")
+            #plt.draw()
+            #plt.scatter(a,b, s=5)
+            break
+        #print ("Original number: ",c)
+        #print (result)
+        #print ("After ",iterations, " iterations: ",size)
+
+        if ((abs(result)) <= divlimit):
+            realkeepers = np.append(realkeepers,a)
+            imagkeepers = np.append(imagkeepers,b)
+
+plt.scatter(realkeepers,imagkeepers, s=2, c='r')
+plt.show()

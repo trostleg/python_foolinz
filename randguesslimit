@@ -1,0 +1,36 @@
+import random
+def getguess(a):
+    rawguess = input(a)
+    #print(rawguess, type(rawguess))
+    try:
+        #int(rawguess)
+        return int(rawguess)
+    except ValueError:
+        return getguess("I need an integer input: ")
+
+#random number guessing game with guess limit
+print("I have chosen a whole number between 1 and 10.")
+num = random.randint(1,10)
+limit = int(input("How many guesses do you get? "))
+print ("Okay, ", limit, " guesses.")
+guess = getguess("What is your guess, Human? ")
+
+#print (guess,type(guess))
+#print (num, type(num))
+#print(guess != num)
+i = 0
+#if guess is wrong:
+while (guess != num):
+    if (i == limit-1):
+        print ("Guess Limit Exceeded")
+        break
+    i += 1
+    print ((limit - i)," Guesses Left")
+    #guess too low:
+    if (guess < num):
+        guess = getguess("Too low, guess again ")
+    #guess too high:
+    else:
+        guess = getguess("Too high, guess again ")
+if (guess == num):
+    print("CONGRATULATIONS HUMAN")
